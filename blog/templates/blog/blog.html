@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">Blog Posts</h1>
+    {% for object in objects %}
+        <ul class="jumbotron">
+            <li>{{object.title}}</li>
+        </ul>   
+    {% endfor %}
+{% endblock %}
+
