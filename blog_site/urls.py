@@ -18,6 +18,7 @@ from django.urls import path, include
 from .views import home_view
 from blog.views import BlogPostView
 from rest_framework import routers
+from users.views import user_registration_view
 
 router = routers.DefaultRouter()
 router.register('blog-posts',BlogPostView)
@@ -26,8 +27,10 @@ router.register('blog-posts',BlogPostView)
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('',home_view),
+    path('',home_view,name='home-page'),
     path('blog/', include('blog.urls')),
+
+    path('register/', user_registration_view),
 
     path('blog-api/',include(router.urls)),
 
