@@ -14,11 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 from .views import home_view
 from blog.views import BlogPostView
 from rest_framework import routers
-from users.views import user_registration_view
+from users.views import user_registration_view,profile_view
 
 router = routers.DefaultRouter()
 router.register('blog-posts',BlogPostView)
@@ -26,14 +30,18 @@ router.register('blog-posts',BlogPostView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path('',home_view,name='home-page'),
     path('blog/', include('blog.urls')),
 
-    path('register/', user_registration_view),
+
+    path('register/', user_registration_view,name='register'),
+    path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
+    path('profile/',profile_view,name='profile'),
+    path('logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
 
     path('blog-api/',include(router.urls)),
-
-    #REST authorization
-    path('api-auth/',include('rest_framework.urls'))
+    path('api-auth/',include('rest_framework.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
