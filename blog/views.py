@@ -12,7 +12,7 @@ class BlogPostView(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
-#Templating views
+#Blog-list
 def blog_list_view(request):
     obj = BlogPost.objects.all()
     template_name = "blog/blog.html"
@@ -41,3 +41,13 @@ def blog_detail_view(request,slug):
     return render(request,template_name,context)
 
 
+def blog_update_view(request,slug):
+    obj = get_object_or_404(BlogPost,slug=slug)
+    form = BlogPostModelForm(request.POST,instance=obj)
+    if form.is_valid():
+        form.save()
+    template_name = "blog/update.html"
+    context = {
+        'form' : form
+    }
+    return render(request,template_name,context)
