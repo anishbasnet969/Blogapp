@@ -2,8 +2,10 @@
 
 {% block content %}
 
-    <h1 class="text-center" style="font-family:'Courier New', Courier, monospace">
-        Blog Home
-    </h1>
+<div class='row'>
+    {% for object in objects %}
+        {% include 'blog/list.html' with blog_post=object truncate=True detail=False %}
+    {% endfor %}
+</div>
 
 {% endblock %}

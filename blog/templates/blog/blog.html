@@ -3,11 +3,11 @@
 
 {% block content %}
     
-    <div class='row'>
+<div class='row'>
     {% for object in objects %}
         {% include 'blog/list.html' with blog_post=object truncate=True detail=False %}
     {% endfor %}
-    </div>
+</div>
 
 {% endblock %}
 

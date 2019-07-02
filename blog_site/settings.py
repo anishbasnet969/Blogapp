@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     #Third-party apps
     'rest_framework',
     'crispy_forms',
+
     #Custom-coded apps
     'blog',
-    'users'
+    'users',
+    'searches'
 ]
 
 MIDDLEWARE = [

@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 from .views import home_view
 from blog.views import BlogPostView
+from searches.views import search_view
 from rest_framework import routers
 from users.views import user_registration_view,profile_view
 
@@ -32,7 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home_view,name='home-page'),
     path('blog/', include('blog.urls')),
-
+    path('search/', search_view),
 
     path('register/', user_registration_view,name='register'),
     path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
